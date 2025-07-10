@@ -1,3 +1,5 @@
+# AUTHOR: OZAN HATIPOGLU - ADVANCED TIME SERIES LECTURE NOTES
+# The Hodrick-Prescott Filter used in RBC Models using the mFilter package. 
 if (!requireNamespace("mFilter", quietly = TRUE)) install.packages("mFilter")
 if (!requireNamespace("ggplot2", quietly = TRUE)) install.packages("ggplot2")
 library(stats)
