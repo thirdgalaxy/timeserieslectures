@@ -1,4 +1,4 @@
-# This R code demonstrates the Schur decomposition on a predefined matrix 
+# Author: Ozan Hatipoglu This R code demonstrates the Schur decomposition on a predefined matrix 
 # A and reconstructs A using the product of the resulting Q and T 
 # matrices to verify the decomposition. Schur decomposition is an 
 # essential tool in numerical linear 
