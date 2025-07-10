@@ -1,4 +1,4 @@
-# Ozan Hatipoglu - Advanced Time Series Lecture Notes
+# Author: Ozan Hatipoglu - Advanced Time Series Lecture Notes
 # In this exercise  
 # 1) we first simulate  3 variables , call them X , Y and Z where Y and Z are more correlated  with each 
 # other than with X. See the covariance matrix.  
@@ -10,87 +10,35 @@
 # Analyze the SVAR model's impulse responses to study how shocks to each variable affect the system.
 # !! See lecture notes of  SVAR with either ‘A-model’, ‘B-model’ or ‘AB-model’ is implemented.  
 # Note there are several packages that can handle VAR and SVAR. 
+# Install and load only what's needed
 
-if(!require(vars)) install.packages("vars")
-if(!require(MASS)) install.packages("MASS")
-if(!require(MTS)) install.packages("MTS")
+# Install required packages
+if (!require("vars")) install.packages("vars")
+if (!require("svars")) install.packages("svars")
+if (!require("MASS")) install.packages("MASS")
 
-library(vars)
+
 library(MASS)
-set.seed(123) # For reproducibility
+library(vars)   # make sure vars is loaded after MTS
+library(svars)
 
-# Step 1 
-# Number of observations
+# Simulate correlated data
+set.seed(123)
 n <- 1000
-
-# Mean vector
-mu <- c(X = 0, Y = 0, Z = 0)
-
-# Covariance matrix (specify higher correlation between Y and Z)
-Sigma <- matrix(c(1, 0.1, 0.1,  # Covariance between X and others
-                  0.1, 1, 0.8,  # Covariance between Y and Z
-                  0.1, 0.8, 1), # Symmetric
-                byrow = TRUE, nrow = 3)
-
-# Simulate the data
-data <- mvrnorm(n = n, mu = mu, Sigma = Sigma)
+mu <- c(0, 0, 0)
+Sigma <- matrix(c(1, 0.1, 0.1,
+                  0.1, 1, 0.8,
+                  0.1, 0.8, 1), nrow = 3, byrow = TRUE)
+data <- mvrnorm(n, mu = mu, Sigma = Sigma)
 colnames(data) <- c("X", "Y", "Z")
-data <- ts(data)
+data_ts <- ts(data)
 
-# Step 2 
-# Fit a VAR model, select order by AIC
-var_model <- VAR(data_ts, p = 3, type = "const")
+# Estimate VAR (note the namespace prefix!)
+var_model <- vars::VAR(data_ts, p = 2, type = "const")
 
-# Check summary
-summary(var_model)
-# Check var-covar
-var_model$Sigma
+# Identify SVAR using recursive (Cholesky) ordering
+svar_chol <- svars::id.chol(var_model)
 
-# Step 3 
-
-# Estimate SVAR with Cholesky decomposition based on the specified ordering as specified above
-#X→Y→Z
-
-amat <- diag(3)
-diag(amat) <- NA
-amat[2, 1] <- NA
-amat[3, 1] <- NA
-
-
-svar_model <- SVAR(var_model, method = "chol", ordering = c("X", "Y", "Z"))
-
-SVAR(x = var_model , estmethod = "scoring", Amat = amat, Bmat = NULL,max.iter = 100, maxls = 1000, conv.crit = 1.0e-8) 
-     
-# Summary of the SVAR model
-summary(svar_model)
-
-# Estimate SVAR with Cholesky decomposition based on the specified ordering
-svar_model <- SVAR(var_model, method = "chol", ordering = c("X", "Y", "Z"))
-
-# Step 4 
-# Summary of the SVAR model
-summary(svar_model)
-
-# Plot impulse response functions
-irf(svar_model, n.ahead = 20, boot = TRUE, ci = 0.95)
-
-
-library(MTS)
-
-data_ts <- ts(data, frequency=1) # Adjust frequency as appropriate
-var_result <- VAR(data_ts, p = 2, type = "const")
-
-
-# Fit a VAR model (if you haven't already with 'vars')
-var_result <- VAR(data_ts, p=2, output=FALSE)
-
-# Apply SVAR analysis with Cholesky decomposition
-svar_result <- SVAR(var_result, p=2, type="chol")
-
-# Summary of the SVAR model
-summary(svar_result)
-
-# Impulse response analysis
-irf_result <- irf(svar_result$A, svar_result$B, n.ahead=10)
+# IRF using vars package
+irf_result <- vars::irf(svar_chol, n.ahead = 20, boot = TRUE, ci = 0.95)
 plot(irf_result)
-
