@@ -1,4 +1,7 @@
 #WORLD BANK WORLD DEVELOPMENT INDICATORS (WDI) API
+# this is an example about how you would download data from World Development Indicators
+# using search functions within the WDI package and producing comparative plots.
+#Author: Ozan Hatipoglu Date> 11.10.2021
 
 install.packages('WDI')
 library('WDI')
