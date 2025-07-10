@@ -1,3 +1,4 @@
+# AUTHOR: OZAN HATIPOGLU - ADVANCED TIME SERIES LECTURE NOTES
 set.seed(123) # For reproducibility
 n_countries <- 20
 n_observations <- 120
