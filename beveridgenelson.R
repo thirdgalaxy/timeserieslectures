@@ -1,3 +1,8 @@
+# AUTHOR: OZAN HATIPOGLU - ADVANCED TIME SERIES LECTURE NOTES
+# This is another example of the BEveridge -Nelson Decomposition. Note that for each process you 
+# you have to  derive algebraically the Permanent and Trend Component first 
+# using lag operators as demonstrated in class
+
 # Ensure the necessary libraries are installed and loaded
 if (!require('forecast')) install.packages('forecast')
 if (!require('ggplot2')) install.packages('ggplot2')
