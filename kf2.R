@@ -1,3 +1,5 @@
+# AUTHOR: OZAN HATIPOGLU - ADVANCED TIME SERIES LECTURE NOTES
+
 # Load necessary library
 install.packages("dlm")
 library(dlm)
