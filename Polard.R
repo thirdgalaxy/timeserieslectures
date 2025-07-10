@@ -1,3 +1,4 @@
+# Author: Ozan Hatipoglu - ADVANCED TIME SERIES LECTURES 2021
 # Implementing Polar Decomposition in R can be achieved using the SVD
 # In this R code, the svd() function is used to perform the SVD of matrix A. 
 # The unitary and positive semi-definite matrices of the Polar Decomposition 
