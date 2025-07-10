@@ -4,6 +4,7 @@
 # instrumentalin many data-driven applications, including 
 # dimensionality reduction and noise reduction
 # Define a matrix A
+# Author: Ozan Hatipoglu
 A <- matrix(c(1, 0, 0, 0, 2, 0, 0, 0, 3), nrow = 3)
 
 # Perform Singular Value Decomposition
