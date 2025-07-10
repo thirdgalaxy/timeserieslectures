@@ -1,3 +1,6 @@
+# AUTHOR: OZAN HATIPOGLU - ADVANCED TIME SERIES LECTURE NOTES
+
+# 
 # Load necessary libraries
 library(ggplot2)
 library(gridExtra)
