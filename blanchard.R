@@ -1,3 +1,5 @@
+# AUTHOR: OZAN HATIPOGLU - ADVANCED TIME SERIES LECTURE NOTES
+# THIS CODE NEEDS UPDATING !!!
 set.seed(123) # For reproducibility
 n <- 100 # Number of observations
 
