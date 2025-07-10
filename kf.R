@@ -1,3 +1,5 @@
+# AUTHOR: OZAN HATIPOGLU - ADVANCED TIME SERIES LECTURE NOTES
+# DEMONSTRATION OF STANDARD KALMAN FILTER WITH DLM PACKAGE
 # Load necessary library
 if (!require("dlm")) install.packages("dlm", dependencies=TRUE)
 library(dlm)
