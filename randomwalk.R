@@ -1,4 +1,5 @@
-# Load necessary library
+#Author: Ozan Hatipoglu - Advanced Time Series Lecture Notes
+Load necessary library
 library(ggplot2)
 
 # Function to simulate a random walk
