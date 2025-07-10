@@ -1,3 +1,6 @@
+# AUTHOR: OZAN HATIPOGLU - ADVANCED TIME SERIES LECTURE NOTES
+# FORWAD PROPAGATION OF A GEOMETRIC BROWNIAN MOTION USING HISTORICAL DATA ON GOLD PRICES
+
 # Clear the R environment before running the script
 rm(list = ls())  # Clears all objects in the environment
 gc()             # Calls garbage collection to free up memory
