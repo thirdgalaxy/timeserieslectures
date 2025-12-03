@@ -1,5 +1,5 @@
-# LDL Decomposition is a variant of the Cholesky decomposition 
-# that is used forsymmetric, but not necessarily positive 
+# Ozan Hatipoglu LDL Decomposition is a version of the Cholesky decomposition 
+# that is used for symmetric, but not necessarily positive 
 # definite, matrices. 
 # In this R code, the ldl() function is used to decompose a symmetric
 # matrix A into L and D. The original matrix is then reconstructed to 
@@ -9,23 +9,37 @@
 if (!require(Matrix)) install.packages("Matrix")
 library(Matrix)
 
-# Define a symmetric matrix A
-A <- matrix(c(4, -2, 2, -2, 2, -1, 2, -1, 3), nrow = 3, byrow = TRUE)
+# Symmetric positive definite matrix
+A <- matrix(c(4, -2,  2,
+              -2, 2, -1,
+              2, -1, 3),
+            nrow = 3, byrow = TRUE)
 
-# Perform LDL decomposition
-ldl_decomp <- ldl(A)
+# Cholesky: A = R^T R, R upper triangular
+R_chol <- chol(A)
 
-# Extract L and D matrices
-L <- ldl_decomp$L
-D <- ldl_decomp$D
+# Convert to a lower-triangular factor L_chol so that A = L_chol L_chol^T
+L_chol <- t(R_chol)
 
-# Display the matrices
-print("Lower Triangular Matrix L:")
+# Extract diagonal entries
+d  <- diag(L_chol)
+
+# Build unit lower-triangular L and diagonal D such that A = L D L^T
+L <- L_chol
+for (j in seq_along(d)) {
+  L[, j] <- L[, j] / d[j]   # divide each column j by d[j]
+}
+D <- diag(d^2)
+
+cat("Lower triangular L (unit diagonal):\n")
 print(L)
-print("Diagonal Matrix D:")
+cat("Diagonal D:\n")
 print(D)
 
-# Verify the result
+# Verify A = L D L^T
 A_reconstructed <- L %*% D %*% t(L)
-print("Reconstructed Matrix A (should match original):")
+
+cat("Original A:\n")
+print(A)
+cat("Reconstructed A (L D L^T):\n")
 print(A_reconstructed)

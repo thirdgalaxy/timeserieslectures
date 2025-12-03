@@ -1,3 +1,4 @@
+# Author: Ozan Hatipoglu - Advanced Time Series LEcture Notes
 # This R code performs the QR decomposition on a predefined matrix A
 # and then reconstructs A using the product of the resulting Q and 
 # R matrices to verify the decomposition. QR decomposition is 
@@ -24,4 +25,5 @@ print(R)
 # Verify the result
 A_reconstructed <- Q %*% R
 print("Reconstructed Matrix A (should match original):")
+print(A)
 print(A_reconstructed)

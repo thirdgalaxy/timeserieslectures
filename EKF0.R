@@ -1,3 +1,5 @@
+# AUTHOR: OZAN HATIPOGLU - ADVANCED TIME SERIES LECTURE NOTES
+# Extended Kalman Filter
 set.seed(123) # For reproducibility
 T <- 100 # Number of time steps
 phi <- 0.9 # AR coefficient for x1
